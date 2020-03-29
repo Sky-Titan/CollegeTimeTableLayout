@@ -3,7 +3,7 @@ package org.techtown.timetablelayout;
 import android.content.Context;
 
 import android.content.res.TypedArray;
-
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -13,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
-
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.techtown.timetablelayout.Cell;
+import org.techtown.timetablelayout.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,20 +104,6 @@ public class CollegeTimeTableLayout extends GridLayout {
                 if(i!=0 && j!=0)
                 {
                     cell.setClickable(true);
-                    cell.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Log.d(TAG,"click cell");
-                            if(((TextView)view).getText().toString().equals(""))//스케줄 없음
-                            {
-                                Toast.makeText(getContext(),"추가",Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                Toast.makeText(getContext(),"삭제",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
                 }
 
 
@@ -215,6 +203,73 @@ public class CollegeTimeTableLayout extends GridLayout {
         schedule_cell.setLayoutParams(layoutParams);
     }
 
+    //스케줄 추가
+    public void addSchedule(String text, int row, int column, int blocks)
+    {
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+        }
+
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row,column);
+        schedule_cell.setText(text);
+        schedule_cell.setScheduled(true);
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    //스케줄 추가
+    public void addSchedule(String text, int row, int column, int blocks, int backgroundColor)
+    {
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+        }
+
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row,column);
+        schedule_cell.setText(text);
+        schedule_cell.setScheduled(true);
+        //cell 색깔 지정
+        schedule_cell.setBackgroundColor(backgroundColor);
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    //스케줄 추가
+    public void addSchedule(String text, int row, int column, int blocks, int backgroundColor, int textColor)
+    {
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+        }
+
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row,column);
+        schedule_cell.setText(text);
+        schedule_cell.setScheduled(true);
+        //색지정
+        schedule_cell.setBackgroundColor(backgroundColor);
+        schedule_cell.setTextColor(textColor);
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
     //모든 cell 가져옴
     public Cell[][] getAllCell()
     {
@@ -297,12 +352,18 @@ public class CollegeTimeTableLayout extends GridLayout {
         this.column_names = column_names;
     }
     //특정 row, column의 cell 반환
-    public Cell findCell(String row, String column)
+    public Cell findCell(String row_name, String column_name)
     {
-        Cell cell = (Cell)findViewWithTag(row+"-"+column);
+        Cell cell = (Cell)findViewWithTag(row_name+"-"+column_name);
         return cell;
     }
 
+    //특정 row, column의 cell 반환
+    public Cell findCell(int row, int column)
+    {
+        Cell cell = (Cell)findViewWithTag(row_names[row]+"-"+column_names[column]);
+        return cell;
+    }
     //해당 cell의 text를 보고 찾음
     public Cell findCellWithText(String text)
     {
@@ -361,88 +422,5 @@ public class CollegeTimeTableLayout extends GridLayout {
         addCells();
     }
 
-    //Cell 객체 클래스
-    private class Cell extends FrameLayout{
-
-        private boolean isScheduled = false;
-        private TextView textView;
-        public Cell(Context context) {
-            super(context);
-            initView(context,null);
-        }
-
-        public Cell(Context context,AttributeSet attrs) {
-            super(context, attrs);
-            initView(context,attrs);
-        }
-
-        public Cell(Context context,AttributeSet attrs, int defStyleAttr) {
-            super(context, attrs, defStyleAttr);
-            initView(context,attrs);
-        }
-
-        private void initView(Context context, AttributeSet attrs) {
-
-            textView = new TextView(context);
-
-            //ripple effect 적용
-            TypedValue typedValue = new TypedValue();
-            getContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, typedValue,true);
-            int resId = typedValue.resourceId;
-            textView.setBackgroundResource(resId);
-
-            addView(textView);
-        }
-
-        public boolean isScheduled()
-        {
-            return isScheduled;
-        }
-        public void setScheduled(boolean isScheduled)
-        {
-            this.isScheduled = isScheduled;
-        }
-        public TextView getTextView() {
-            return textView;
-        }
-
-
-        public void setGravity(int gravity)
-        {
-            textView.setGravity(gravity);
-        }
-
-        public void setTextColor(int color)
-        {
-            textView.setTextColor(color);
-        }
-
-        public void setText(String text)
-        {
-            textView.setText(text);
-        }
-
-        @Override
-        public void setClickable(boolean clickable) {
-            super.setClickable(clickable);
-            textView.setClickable(clickable);
-        }
-
-        @Override
-        public void setVisibility(int visibility) {
-            super.setVisibility(visibility);
-            textView.setVisibility(visibility);
-        }
-
-        @Override
-        public void setOnClickListener(View.OnClickListener l) {
-            textView.setOnClickListener(l);
-        }
-
-        public String getText()
-        {
-            return textView.getText().toString();
-        }
-    }
 
 }
