@@ -101,11 +101,8 @@ public class CollegeTimeTableLayout extends GridLayout {
                 Cell cell = new Cell(getContext());
                 cell.setTag(row_names[i]+"-"+column_names[j]);//행열로 태그 설정
 
-                if(i!=0 && j!=0)
-                {
-                    cell.setClickable(true);
-                }
-
+                cell.setRow(i);
+                cell.setColumn(j);
 
                 cell.setBackgroundColor(cellColor);//cell 배경색 설정
                 cell.setTextColor(cellTextColor);//cell text 색 설정
@@ -130,6 +127,15 @@ public class CollegeTimeTableLayout extends GridLayout {
     //스케줄 추가
     public void addSchedule(String text, String row_name, String column_name, int blocks)
     {
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row_name,column_name);
+
+        if(schedule_cell.getVisibility() == View.GONE || schedule_cell.isScheduled())//스케줄 있는 시간
+        {
+            Toast.makeText(getContext(),"already exists schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ArrayList<String> row_list = new ArrayList<>(Arrays.asList(row_names));
         int origin_index = row_list.indexOf(row_name);
 
@@ -138,12 +144,13 @@ public class CollegeTimeTableLayout extends GridLayout {
         {
             Cell cell= findCell(row_names[origin_index+i],column_name);
             cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
         }
 
-        //스케줄 추가 cell
-        Cell schedule_cell = findCell(row_name,column_name);
         schedule_cell.setText(text);
         schedule_cell.setScheduled(true);
+        schedule_cell.setClickable(true);
         //병합
         GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
         layoutParams.rowSpec = GridLayout.spec(origin_index, blocks,1.0f);
@@ -153,6 +160,15 @@ public class CollegeTimeTableLayout extends GridLayout {
     //스케줄 추가
     public void addSchedule(String text, String row_name, String column_name, int blocks, int backgroundColor)
     {
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row_name,column_name);
+
+        if(schedule_cell.getVisibility() == View.GONE || schedule_cell.isScheduled())//스케줄 있는 시간
+        {
+            Toast.makeText(getContext(),"already exists schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ArrayList<String> row_list = new ArrayList<>(Arrays.asList(row_names));
         int origin_index = row_list.indexOf(row_name);
 
@@ -161,12 +177,14 @@ public class CollegeTimeTableLayout extends GridLayout {
         {
             Cell cell= findCell(row_names[origin_index+i],column_name);
             cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
         }
 
         //스케줄 추가 cell
-        Cell schedule_cell = findCell(row_name,column_name);
         schedule_cell.setText(text);
         schedule_cell.setScheduled(true);
+        schedule_cell.setClickable(true);
         //cell 색깔 지정
         schedule_cell.setBackgroundColor(backgroundColor);
 
@@ -179,6 +197,15 @@ public class CollegeTimeTableLayout extends GridLayout {
     //스케줄 추가
     public void addSchedule(String text, String row_name, String column_name, int blocks, int backgroundColor, int textColor)
     {
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row_name,column_name);
+
+        if(schedule_cell.getVisibility() == View.GONE || schedule_cell.isScheduled())//스케줄 있는 시간
+        {
+            Toast.makeText(getContext(),"already exists schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ArrayList<String> row_list = new ArrayList<>(Arrays.asList(row_names));
         int origin_index = row_list.indexOf(row_name);
 
@@ -187,12 +214,14 @@ public class CollegeTimeTableLayout extends GridLayout {
         {
             Cell cell= findCell(row_names[origin_index+i],column_name);
             cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
         }
 
         //스케줄 추가 cell
-        Cell schedule_cell = findCell(row_name,column_name);
         schedule_cell.setText(text);
         schedule_cell.setScheduled(true);
+        schedule_cell.setClickable(true);
         //색지정
         schedule_cell.setBackgroundColor(backgroundColor);
         schedule_cell.setTextColor(textColor);
@@ -206,17 +235,27 @@ public class CollegeTimeTableLayout extends GridLayout {
     //스케줄 추가
     public void addSchedule(String text, int row, int column, int blocks)
     {
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row,column);
+
+        if(schedule_cell.getVisibility() == View.GONE || schedule_cell.isScheduled())//스케줄 있는 시간
+        {
+            Toast.makeText(getContext(),"already exists schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
         //cell 삭제
         for(int i=1;i<blocks;i++)
         {
             Cell cell= findCell(row + i,column);
             cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
         }
 
         //스케줄 추가 cell
-        Cell schedule_cell = findCell(row,column);
         schedule_cell.setText(text);
         schedule_cell.setScheduled(true);
+        schedule_cell.setClickable(true);
         //병합
         GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
         layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
@@ -226,17 +265,28 @@ public class CollegeTimeTableLayout extends GridLayout {
     //스케줄 추가
     public void addSchedule(String text, int row, int column, int blocks, int backgroundColor)
     {
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row,column);
+
+        if(schedule_cell.getVisibility() == View.GONE || schedule_cell.isScheduled())//스케줄 있는 시간
+        {
+            Toast.makeText(getContext(),"already exists schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //cell 삭제
         for(int i=1;i<blocks;i++)
         {
             Cell cell= findCell(row + i,column);
             cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
         }
 
         //스케줄 추가 cell
-        Cell schedule_cell = findCell(row,column);
         schedule_cell.setText(text);
         schedule_cell.setScheduled(true);
+        schedule_cell.setClickable(true);
         //cell 색깔 지정
         schedule_cell.setBackgroundColor(backgroundColor);
 
@@ -249,20 +299,358 @@ public class CollegeTimeTableLayout extends GridLayout {
     //스케줄 추가
     public void addSchedule(String text, int row, int column, int blocks, int backgroundColor, int textColor)
     {
+        //스케줄 추가 cell
+        Cell schedule_cell = findCell(row,column);
+
+        if(schedule_cell.getVisibility() == View.GONE || schedule_cell.isScheduled())//스케줄 있는 시간
+        {
+            Toast.makeText(getContext(),"already exists schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //cell 삭제
         for(int i=1;i<blocks;i++)
         {
             Cell cell= findCell(row + i,column);
             cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
         }
 
         //스케줄 추가 cell
-        Cell schedule_cell = findCell(row,column);
         schedule_cell.setText(text);
         schedule_cell.setScheduled(true);
+        schedule_cell.setClickable(true);
         //색지정
         schedule_cell.setBackgroundColor(backgroundColor);
         schedule_cell.setTextColor(textColor);
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    public void deleteSchedule(int row, int column)
+    {
+        Cell schedule_cell = findCell(row,column);
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //스케줄 삭제처리
+        schedule_cell.setText("");
+        schedule_cell.setScheduled(false);//스케줄 삭제됨
+        schedule_cell.setClickable(false);
+        //색 복구
+        schedule_cell.setBackgroundColor(cellColor);
+        schedule_cell.setTextColor(cellTextColor);
+
+        //병합 복구
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, 1,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+
+        //지워진 cell들 원래대로
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+    }
+
+    public void deleteSchedule(String row_name, String column_name)
+    {
+        Cell schedule_cell = findCell(row_name, column_name);
+
+        int row = schedule_cell.getRow();
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //스케줄 삭제처리
+        schedule_cell.setText("");
+        schedule_cell.setScheduled(false);//스케줄 삭제됨
+        schedule_cell.setClickable(false);
+        //색 복구
+        schedule_cell.setBackgroundColor(cellColor);
+        schedule_cell.setTextColor(cellTextColor);
+
+        //병합 복구
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, 1,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+
+        //지워진 cell들 원래대로
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+    }
+
+    public void deleteScheduleWithText(String text)
+    {
+        Cell schedule_cell = findCellWithText(text);
+
+        int row = schedule_cell.getRow();
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //스케줄 삭제처리
+        schedule_cell.setText("");
+        schedule_cell.setScheduled(false);//스케줄 삭제됨
+        schedule_cell.setClickable(false);
+        //색 복구
+        schedule_cell.setBackgroundColor(cellColor);
+        schedule_cell.setTextColor(cellTextColor);
+
+        //병합 복구
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, 1,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+
+        //지워진 cell들 원래대로
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+    }
+
+    public void modifySchedule(int row, int column,String change_text,int blocks)
+    {
+        Cell schedule_cell = findCell(row, column);
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        schedule_cell.setText(change_text);
+
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
+        }
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    public void modifySchedule(int row, int column,String change_text,int blocks, int backgroundColor, int textColor)
+    {
+        Cell schedule_cell = findCell(row, column);
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        schedule_cell.setText(change_text);
+        schedule_cell.setBackgroundColor(backgroundColor);
+        schedule_cell.setTextColor(textColor);
+
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
+        }
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    public void modifySchedule(String row_name, String column_name, String change_text, int blocks)
+    {
+        Cell schedule_cell = findCell(row_name, column_name);
+
+        int row = schedule_cell.getRow();
+        int column = schedule_cell.getColumn();
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        schedule_cell.setText(change_text);
+
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
+        }
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    public void modifySchedule(String row_name, String column_name, String change_text, int blocks, int backgroundColor, int textColor)
+    {
+        Cell schedule_cell = findCell(row_name, column_name);
+
+        int row = schedule_cell.getRow();
+        int column = schedule_cell.getColumn();
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        schedule_cell.setText(change_text);
+        schedule_cell.setBackgroundColor(backgroundColor);
+        schedule_cell.setTextColor(textColor);
+
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
+        }
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    public void modifyScheduleWithText(String origin_text, String change_text, int blocks)
+    {
+        Cell schedule_cell = findCellWithText(origin_text);
+
+        int row = schedule_cell.getRow();
+        int column = schedule_cell.getColumn();
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        schedule_cell.setText(change_text);
+
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
+        }
+
+        //병합
+        GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
+        layoutParams.rowSpec = GridLayout.spec(row, blocks,1.0f);
+        schedule_cell.setLayoutParams(layoutParams);
+    }
+
+    public void modifyScheduleWithText(String origin_text, String change_text, int blocks, int backgroundColor, int textColor)
+    {
+        Cell schedule_cell = findCellWithText(origin_text);
+
+        int row = schedule_cell.getRow();
+        int column = schedule_cell.getColumn();
+
+        if(!schedule_cell.isScheduled())//스케줄 없는경우
+        {
+            Toast.makeText(getContext(),"not exists any schedule",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        schedule_cell.setText(change_text);
+        schedule_cell.setBackgroundColor(backgroundColor);
+        schedule_cell.setTextColor(textColor);
+
+        ArrayList<Cell> spannedCells = schedule_cell.getSpannedCells();
+        for(int i=0;i<spannedCells.size();i++)
+        {
+            spannedCells.get(i).setVisibility(View.VISIBLE);
+        }
+        spannedCells.clear();
+
+        //cell 삭제
+        for(int i=1;i<blocks;i++)
+        {
+            Cell cell= findCell(row + i,column);
+            cell.setVisibility(View.GONE);
+
+            schedule_cell.addSpannedCells(cell);
+        }
 
         //병합
         GridLayout.LayoutParams layoutParams = (GridLayout.LayoutParams)schedule_cell.getLayoutParams();
@@ -397,7 +785,6 @@ public class CollegeTimeTableLayout extends GridLayout {
 
                 layoutParams.setMargins(left,top,right,bottom);
                 cell.setLayoutParams(layoutParams);
-
             }
         }
     }
@@ -418,6 +805,7 @@ public class CollegeTimeTableLayout extends GridLayout {
         removeAllViews();
 
         super.setColumnCount(columnCount);
+
         initRowColumnNames();
         addCells();
     }
