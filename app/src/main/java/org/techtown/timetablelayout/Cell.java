@@ -45,6 +45,11 @@ public class Cell extends FrameLayout {
 
         setClickable(false);
         addView(textView);
+
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) textView.getLayoutParams();
+        layoutParams.width = LayoutParams.MATCH_PARENT;
+        layoutParams.height = LayoutParams.MATCH_PARENT;
+        textView.setLayoutParams(layoutParams);
     }
 
     public int getRow() {

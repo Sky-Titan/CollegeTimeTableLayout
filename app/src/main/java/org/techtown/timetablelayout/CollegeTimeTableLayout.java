@@ -116,6 +116,8 @@ public class CollegeTimeTableLayout extends GridLayout {
 
                 GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(GridLayout.spec(i,1.0f), GridLayout.spec(j,1.0f));
                 layoutParams.setGravity(Gravity.FILL);
+                layoutParams.width = 0;//스케줄 추가해도 너비 일정하게 유지
+                layoutParams.height = LayoutParams.WRAP_CONTENT;
                 layoutParams.setMargins(cellMarginLeft,cellMarginTop,cellMarginRight,cellMarginBottm);
                 cell.setLayoutParams(layoutParams);
 
