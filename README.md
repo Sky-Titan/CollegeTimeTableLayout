@@ -1,6 +1,11 @@
 # CollegeTimeTableLayout
 대학시간표 레이아웃 라이브러리  
 
+## 관련 링크
+------------------
+- 블로그 : https://blog.naver.com/er65119/221879926097
+- 개발자 이메일 : er65119@naver.com
+
 
 ## 1. 프로젝트 설명
 --------------------
@@ -101,8 +106,3 @@
 </LinearLayout>
 ```
 > <img src=./img/screenshot_2.png width="250">
-
-
-## 5. 개발자 이메일
---------------
-> er65119@naver.com
