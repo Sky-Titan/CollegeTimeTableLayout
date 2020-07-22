@@ -99,9 +99,7 @@
         app:cellColor="@color/white"
         android:background="@color/cell_backgroud_color"
         android:rowCount="5"
-        android:columnCount="3">
-        
-    </org.techtown.timetablelayout.CollegeTimeTableLayout>
+        android:columnCount="3"/>
 
 </LinearLayout>
 ```
