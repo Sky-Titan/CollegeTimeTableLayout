@@ -106,3 +106,23 @@
 </LinearLayout>
 ```
 > <img src=./img/screenshot_2.png width="250">
+
+
+## 5. 배포 패키지 사용법
+---------------
+rootProject의 build.gradle
+```gradle
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" } //추가
+    }
+}
+```
+depedencies 추가
+```gradle
+dependencies {
+    implementation 'com.github.Sky-Titan:CollegeTimeTableLayout:{최신 태그 버전}' //현재 릴리즈 버전 태그 : 0.1-beta
+}
+```
