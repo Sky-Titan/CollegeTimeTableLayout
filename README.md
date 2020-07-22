@@ -1,10 +1,12 @@
 # CollegeTimeTableLayout
-대학시간표 레이아웃 라이브러리
+대학시간표 레이아웃 라이브러리  
+
 
 ## 1. 프로젝트 설명
 --------------------
 > 대학교 시간표 형태의 time table을 편하게 짤 수 있게 하는 안드로이드 커스텀 뷰 라이브러리 프로젝트입니다.  
 (개발 중)
+
 
 ## 2. 개발 환경
 --------------------
@@ -14,6 +16,7 @@
   - Java
 - Super Class
   - GridLayout
+
   
 ## 3. 기능 설명
 --------------------
@@ -67,6 +70,39 @@
     ```java
     public Cell findCellWithText(String text)
     ```
-## 4. 개발자 이메일
+
+
+## 4. xml 예시
+--------------
+>
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<!-- activity_main.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <org.techtown.timetablelayout.CollegeTimeTableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cellColor="@color/white"
+        android:background="@color/cell_backgroud_color"
+        android:rowCount="5"
+        android:columnCount="3">
+        
+    </org.techtown.timetablelayout.CollegeTimeTableLayout>
+
+</LinearLayout>
+```
+> <img src=./img/screenshot_2.png width="250">
+
+
+## 5. 개발자 이메일
 --------------
 > er65119@naver.com
