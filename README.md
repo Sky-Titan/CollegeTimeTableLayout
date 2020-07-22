@@ -1,5 +1,5 @@
 # CollegeTimeTableLayout
-TimeTableLayout library
+대학시간표 레이아웃 라이브러리
 
 ## 1. 프로젝트 설명
 --------------------
