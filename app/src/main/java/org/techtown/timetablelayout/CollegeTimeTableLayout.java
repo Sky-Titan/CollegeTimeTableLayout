@@ -11,14 +11,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.techtown.timetablelayout.Cell;
-import org.techtown.timetablelayout.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +50,7 @@ public class CollegeTimeTableLayout extends GridLayout {
         initView(context, attrs);
     }
 
+
     private void initView(Context context, AttributeSet attrs) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -71,14 +68,20 @@ public class CollegeTimeTableLayout extends GridLayout {
             a.recycle(); // 이용이 끝났으면 recycle() 호출
         }
 
-        initRowColumnNames();
 
         //setBackgroundColor(getResources().getColor(R.color.cell_backgroud_color,null));
         //setOrientation(GridLayout.VERTICAL);
 
-        addCells();
+        createInitCells();
     }
 
+    //초기 cell들 생성
+    private void createInitCells()
+    {
+        initRowColumnNames();
+        addCells();
+    }
+    
     //row, column 이름 초기화
     private void initRowColumnNames()
     {
