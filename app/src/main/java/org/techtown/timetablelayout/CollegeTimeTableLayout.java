@@ -67,8 +67,7 @@ public class CollegeTimeTableLayout extends GridLayout {
             cellMarginLeft = a.getInt(R.styleable.CollegeTimeTableLayout_cellMarginLeft, 5);
             a.recycle(); // 이용이 끝났으면 recycle() 호출
         }
-        removeAllViewsInLayout();
-
+        removeAllViews();
         //setBackgroundColor(getResources().getColor(R.color.cell_backgroud_color,null));
         //setOrientation(GridLayout.VERTICAL);
 
