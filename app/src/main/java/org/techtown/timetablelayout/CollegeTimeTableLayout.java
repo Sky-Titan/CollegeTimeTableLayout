@@ -81,7 +81,7 @@ public class CollegeTimeTableLayout extends GridLayout {
         initRowColumnNames();
         addCells();
     }
-    
+
     //row, column 이름 초기화
     private void initRowColumnNames()
     {
