@@ -121,6 +121,7 @@ allprojects {
 depedencies 추가
 ```gradle
 dependencies {
-    implementation 'com.github.Sky-Titan:CollegeTimeTableLayout:{최신 태그 버전}' //현재 릴리즈 버전 태그 : 0.1-beta
+    implementation 'com.github.Sky-Titan:CollegeTimeTableLayout:{최신 태그 버전}' 
+    //현재 릴리즈 버전 태그 : 0.3-test
 }
 ```
