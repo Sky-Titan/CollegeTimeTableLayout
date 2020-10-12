@@ -1,6 +1,8 @@
 # CollegeTimeTableLayout
 대학시간표 레이아웃 라이브러리  
 
+<img src=./img/1_mockup.png width="500">
+
 ## 관련 링크
 ------------------
 - 블로그 : https://blog.naver.com/er65119/221879926097
@@ -35,7 +37,6 @@
     - column_name : 열 이름
     - blocks : 차지하는 칸 수 (행 기준)
     - 예시 : addSchedule("운영체제", "1교시", "수", 2);
-    - <img src=./img/screenshot_1.png width="250">
   - 스케줄 삭제  
     ```java
     public void deleteSchedule(String row_name, String column_name)
