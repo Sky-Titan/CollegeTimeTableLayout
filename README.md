@@ -10,7 +10,7 @@
 - **Developer E-mail :** er65119@naver.com
 
 
-## Project
+## Project 
 --------------------
 대학교 시간표 형태의 time table layout을 편하게 구성하게 해주는 안드로이드 커스텀 뷰 라이브러리 프로젝트입니다.  
 (개발 중)  
@@ -18,7 +18,7 @@
 > This is an Android Custom View Library project that allows you to conveniently configure time table layout in the form of a university timetable.
 (Developing)
 
-## Develop Environment
+## Develop Environment 개발 환경
 --------------------
 ### 1. OS
 - Android  
@@ -30,26 +30,26 @@
   - GridLayout
 
   
-## Functions
+## Functions 기능
 --------------------
 ### 1. Schedule Functions
-#### Schedule add  
+#### Schedule add (스케줄 추가)  
   ```java
   pulic void addSchedule(String text, String row_name, String column_name, int blocks)
   ```
-- text : 스케줄 내용
-- row_name : 행 이름
-- column_name : 열 이름
-- blocks : 차지하는 칸 수 (행 기준)
-- 예시 : addSchedule("운영체제", "1교시", "수", 2);
-#### Schedule delete  
+- **text :** 스케줄 내용
+- **row_name :** 행 이름
+- **column_name :** 열 이름
+- **blocks :** 차지하는 칸 수 (행 기준)
+- **예시 :** `addSchedule("운영체제", "1교시", "수", 2);`
+#### Schedule delete (스케줄 삭제)  
 ```java
 public void deleteSchedule(String row_name, String column_name)
 ```
 - **row_name :** 행 이름
 - **column_name :** 열 이름
-- **예시 :** deleteSchedule("1교시", "수");
-#### Schedule Modify  
+- **예시 :** `deleteSchedule("1교시", "수");`
+#### Schedule Modify (스케줄 수정)
 ```java
 public void modifySchedule(String row_name, String column_name, String change_text, int blocks)
 ```
@@ -57,26 +57,26 @@ public void modifySchedule(String row_name, String column_name, String change_te
 - **column_name :** 열 이름
 - **change_text :** 수정 스케줄 내용
 - **blocks :** 차지하는 칸 수
-- **예시 :** modifySchedule("1교시", "수", "컴퓨터 구조", 3);
+- **예시 :** `modifySchedule("1교시", "수", "컴퓨터 구조", 3);`
         
 ### 2. Cell Functions
-#### Get All Cells
+#### Get All Cells (모든 Cell 가져오기)
 ```java
 public Cell[][] getAllCell()
 ```
-#### Change Cell Background Color
+#### Change Cell Background Color (Cell 배경색 설정)
 ```java 
 public void setCellColor(int cellColor)
 ```
-#### Configure Cell Margin
+#### Configure Cell Margin (Cell 마진 설정)
 ```java
 public void setCellsMargin(int left, int top, int right, int bottom)
 ```
-#### Find Specific Cell
+#### Find Specific Cell (특정 Cell 찾기)
 ```java
 public Cell findCell(String row_name, String column_name)
 ```
-#### Find Specific Cell using Schedule content
+#### Find Specific Cell using Schedule content (스케줄 내용으로 특정 Cell 찾기)
 ```java
 public Cell findCellWithText(String text)
 ```
@@ -111,7 +111,7 @@ public Cell findCellWithText(String text)
 > <img src=./img/screenshot_2.png width="250">
 
 
-## Destributed Package Manual
+## Destributed Package Manual 배포 패키지 사용법
 ---------------
 rootProject의 build.gradle
 ```gradle
